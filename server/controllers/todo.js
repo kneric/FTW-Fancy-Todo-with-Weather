@@ -40,16 +40,11 @@ const listTodo = (req, res) => {
 }
 
 const updateTodo = (req, res) => {
-  Todo.findById(req.params.id)
-  .then(todo => {
-    return todo.update({
-      $set : req.body
-    })
-    .then (updatedtodo=> {
-      res.status(200).json({
-        updatedtodo, 
-        message:'todo updated'
-      })
+  Todo.findByIdAndUpdate(req.params.id, {$set: req.body}, {new: true})
+  .then (updatedtodo=> {
+    res.status(200).json({
+      updatedtodo, 
+      message:'todo updated'
     })
   })
   .catch(err=> {
