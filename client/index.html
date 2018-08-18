@@ -17,6 +17,7 @@
 </head>
 <body>
   <script src="assets/js/auth.js"></script>
+  <script src="assets/js/register.js"></script>
 
   <nav class="navbar navbar-expand-md navbar-light bg-primary">
     <div class="container-fluid">
@@ -53,10 +54,10 @@
         <div class="col-lg-6 col-md-6 col-sm-6">
           <p class="text-center">or login manually:</p>
           <div class="input-group mb-3">
-            <input type="email" class="form-control" placeholder="Enter email..." aria-label="Email">
+            <input id="email" type="email" class="form-control" placeholder="Enter email..." aria-label="Email">
           </div>
           <div class="input-group mb-3">
-            <input type="password" class="form-control" placeholder="Enter password..." aria-label="Password">
+            <input id="password" type="password" class="form-control" placeholder="Enter password..." aria-label="Password">
           </div>
           <div class="offset-md-4 offset-lg-4 offset-sm-4">
             <a class="align-right" onclick="login()" href="#"><button>Login</button></a>
@@ -90,8 +91,9 @@
             </button>
           </div>
           <div class="modal-body">
-            <input type="email" class="form-control" placeholder="Enter email..." aria-label="Email">
-            <input type="password" class="form-control" placeholder="Enter password..." aria-label="Password">
+            <input id="newName" type="text" class="form-control" placeholder="Enter name..." aria-label="Name">
+            <input id="newEmail" type="email" class="form-control" placeholder="Enter email..." aria-label="Email">
+            <input id="newPassword" type="password" class="form-control" placeholder="Enter password..." aria-label="Password">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

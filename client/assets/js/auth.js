@@ -18,8 +18,23 @@ function isLoggedOut (){
   $('#loggedIn').addClass('d-none');
 }
 
+function login () {
+  axios.post('http://localhost:3000/signin', {
+    email: $('#email').val(),
+    password: $('#password').val()
+  })
+  .then(data => {
+    localStorage.setItem('token', data.token);
+    location.reload();
+  })
+  .catch(err => {
+    alert(err.message);
+  })
+}
+
 function logout () {
   localStorage.removeItem('token');
+  alert('logout success!');
   location.reload();
 }
 
@@ -44,14 +59,14 @@ window.fbAsyncInit = function() {
 function checkLoginState() {
   FB.getLoginStatus(function(response) {
     if (response.status == 'connected'){
-      axios.post('http://localhost:3000/login', response.authResponse)
+      axios.post('http://localhost:3000/loginfb', response.authResponse)
       .then(data => {
         console.log(data);
         localStorage.setItem('token', data.data.token);
         location.reload();
       })
       .catch(err => {
-        res.status(403)
+        alert('incorrect username/ password');
         location.reload();
       })
     }
