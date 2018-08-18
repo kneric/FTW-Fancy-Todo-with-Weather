@@ -10,9 +10,9 @@ const auth = (req, res, next)=> {
     User.findById(loggedInUser._id)
     .then(user => {
       if (!user){
-        res.status(404).json({message: 'user is not registered'})
+        res.status(404).json({message: 'user is not registered'});
       } else {
-        return loggedInUser
+        return next();
       }
     })
     .catch(err => {
@@ -20,4 +20,5 @@ const auth = (req, res, next)=> {
     })
   }
 }
+
 module.exports = auth

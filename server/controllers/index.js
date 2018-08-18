@@ -13,7 +13,7 @@ const signin = (req, res) => {
           let token = jwt.sign({_id: user._id}, process.env.secretKey)
           res.status(200).json({token, message:'Signed in succesfully'})
         } else {
-          res.status(400).json({message:'Username / password is incorrect'})
+          res.status(403).json({message:'Username / password is incorrect'})
         }
       })
     } else {
@@ -31,7 +31,7 @@ const signup = (req, res) => {
   User.findOne({email})
   .then(user => {
     if(!user){
-      User.create({
+      return User.create({
         name,
         email,
         password
@@ -42,9 +42,6 @@ const signup = (req, res) => {
           token: token, 
           message: 'user created'
         })
-      })
-      .catch(err=> {
-        res.status(400).json({message: err})
       })
     } else {
       res.status(400).json({message: 'email already used'})
@@ -82,7 +79,7 @@ const loginFB = (req, res) =>{
           })
         })
       } else {
-        let token = jwt.sign({_id: createdUser._id}, process.env.secretKey)
+        let token = jwt.sign({_id: userOnDb._id}, process.env.secretKey)
         res.status(200).json({
           token,
           message: 'login with FB success'
