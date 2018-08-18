@@ -1,3 +1,28 @@
+function tokenCheck () {
+  if (localStorage.getItem('token')){
+    return isLoggedIn();
+  }
+  return isLoggedOut();
+}
+
+function isLoggedIn (){
+  $('#notLoggedIn').addClass('d-none');
+  $('#logout-btn').removeClass('d-none');
+  $('#loggedIn').removeClass('d-none');
+}
+
+function isLoggedOut (){
+  $('#notLoggedIn').removeClass('d-none');
+  $('#logout-btn').addClass('d-none');
+  $('#loggedIn').addClass('d-none');
+}
+
+function logout () {
+  localStorage.removeItem('token');
+  location.reload();
+}
+
+
 window.fbAsyncInit = function() {
   FB.init({
     appId            : '226380818062847',
@@ -22,10 +47,11 @@ function checkLoginState() {
       .then(data => {
         console.log(data);
         localStorage.setItem('token', data.data.token);
-        $('#notLoggedIn').addClass('invisible')
+        location.reload();
       })
       .catch(err => {
-        console.log(err);
+        res.status(403)
+        location.reload();
       })
     }
   });
