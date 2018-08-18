@@ -1,4 +1,5 @@
 function tokenCheck () {
+  console.log('jalan');
   if (localStorage.getItem('token')){
     return isLoggedIn();
   }

@@ -13,6 +13,7 @@
       font-size: 18px;
     }
   </style>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 </head>
 <body>
   <script src="assets/js/auth.js"></script>
@@ -27,7 +28,7 @@
         <div class="navbar-nav">
           <a class="nav-item nav-link" href="#">Home <span class="sr-only">(current)</span></a>
           <button class="nav-item nav-link btn btn-success mr-2" onclick="add()"> Add todo </button>
-          <a id="logout-btn" class="nav-item nav-link d-none" onclick="logout()" href="#">Logout</a>
+          <button id="logout-btn" class="nav-item nav-link d-none btn btn-warning mr-2" onclick="logout()"> Logout </button>
         </div>
       </div>
     </div>
@@ -125,15 +126,12 @@
   </div>
 
   <script>
-    $(document).ready(function () {
-      tokenCheck();
-    });
+    window.onload = tokenCheck();
   </script>
 
   <!-- This only for development! -->
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
