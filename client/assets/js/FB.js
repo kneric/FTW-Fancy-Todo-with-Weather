@@ -21,10 +21,11 @@ function checkLoginState() {
       axios.post('http://localhost:3000/login', response.authResponse)
       .then(data => {
         console.log(data);
-        localStorage.setItem('token', data.data.token)
+        localStorage.setItem('token', data.data.token);
+        $('#notLoggedIn').addClass('invisible')
       })
       .catch(err => {
-        // $('#notLoggedIn').removeClass('white-text')
+        console.log(err);
       })
     }
   });

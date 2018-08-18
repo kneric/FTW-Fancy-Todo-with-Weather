@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>FTW!! Fancy Todo with Weather</title>
+  <title>FTW! Fancy Todo with Weather</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
   <style>
@@ -17,6 +17,111 @@
 <body>
   <script src="assets/js/FB.js"></script>
 
+  <nav class="navbar navbar-expand-md navbar-light bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">FTW!</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link" href="#">Add new to-do</a>
+          <a id="logout-btn" class="nav-item nav-link invisible" onclick="logout()" href="#">Logout</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row" id="notLoggedIn">
+      <div class="col-lg-6 col-md-6 offset-m-3 offset-lg-3">
+        <h3>Please Login First :</h3>
+        <div class="offset-md-2 offset-lg-2">
+          <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+          </fb:login-button>
+        </div>
+      </div>
+    </div>
+
+    <br>
+    
+    <div class="row" id="notLoggedIn">
+      <div class="col-lg-6 col-md-6 offset-m-3 offset-lg-3">
+        <div class="col-lg-6 col-md-6">
+          <p class="text-center">or login manually:</p>
+          <div class="input-group mb-3">
+            <input type="email" class="form-control" placeholder="Enter email..." aria-label="Email">
+          </div>
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Enter password..." aria-label="Password">
+          </div>
+          <div class="offset-md-4 offset-lg-4">
+            <a class="align-right" onclick="login()" href="#"><button>Login</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="row" id="notLoggedIn">
+      <div class="col-lg-6 col-md-6 offset-m-3 offset-lg-3">
+        <div class="col-lg-6 col-md-6">
+          <p class="text-center">Dont have an account?</p>
+          <div class="offset-md-3 offset-lg-3">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">
+            Register
+            </button>        
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  <!-- Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="registerModalLabel">Create New Account</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <input type="email" class="form-control" placeholder="Enter email..." aria-label="Email">
+            <input type="password" class="form-control" placeholder="Enter password..." aria-label="Password">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="register()" >Register</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <br>
+        <div class="row">
+          <div class="col-lg-3 col-md-3 col-sm-3 mb-3 mt-3">
+            <div class="card">
+              <div class="card-body text-center">
+                <p><strong>Task</strong></p>
+                <p>Due Date: </p>
+                <p>Priority: </p>
+                <p>Description: </p>
+                <p>lalalala</p>
+                <button class="btn btn-warning mr-2" onclick="edit(id)"> Edit </button>
+                <button class="btn btn-success mr-2" onclick="remove(id)"> Complete </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 
   <!-- This only for development! -->
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
