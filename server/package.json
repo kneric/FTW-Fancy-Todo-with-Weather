@@ -1,0 +1,20 @@
+{
+  "name": "FTW-Fancy-Todo-with-Weather",
+  "version": "1.0.0",
+  "description": "My #2 portfolio on Hacktiv8",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kneric/FTW-Fancy-Todo-with-Weather.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kneric/FTW-Fancy-Todo-with-Weather/issues"
+  },
+  "homepage": "https://github.com/kneric/FTW-Fancy-Todo-with-Weather#readme"
+}
