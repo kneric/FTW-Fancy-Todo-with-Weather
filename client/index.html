@@ -38,43 +38,45 @@
   <div class="container">
 
     <!-- Login form -->
-    <div class="row" id="notLoggedIn">
-      <div class="col-lg-6 col-md-6 col-sm-6 offset-m-3 offset-lg-3">
-        <h3>Please Login First :</h3>
-        <div class="offset-md-2 offset-lg-2 offset-sm-2">
-          <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-          </fb:login-button>
-        </div>
-      </div>
-    </div>
-    <br>
-    
-    <div class="row" id="notLoggedIn">
-      <div class="col-lg-6 col-md-6 col-sm-6 offset-m-3 offset-lg-3 offset-sm-3">
-        <div class="col-lg-6 col-md-6 col-sm-6">
-          <p class="text-center">or login manually:</p>
-          <div class="input-group mb-3">
-            <input id="email" type="email" class="form-control" placeholder="Enter email..." aria-label="Email">
-          </div>
-          <div class="input-group mb-3">
-            <input id="password" type="password" class="form-control" placeholder="Enter password..." aria-label="Password">
-          </div>
-          <div class="offset-md-4 offset-lg-4 offset-sm-4">
-            <a class="align-right" onclick="login()" href="#"><button>Login</button></a>
+    <div id="notLoggedIn">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 offset-m-3 offset-lg-3">
+          <h3>Please Login First :</h3>
+          <div class="offset-md-2 offset-lg-2 offset-sm-2">
+            <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+            </fb:login-button>
           </div>
         </div>
       </div>
-    </div>
-    <br>
-
-    <div class="row" id="notLoggedIn">
-      <div class="col-lg-6 col-md-6 col-sm-6 offset-m-3 offset-lg-3 offset-sm-3">
-        <div class="col-lg-6 col-md-6 col-sm-6">
-          <p class="text-center">Dont have an account?</p>
-          <div class="offset-md-3 offset-lg-3 offset-sm-3">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">
-            Register
-            </button>        
+      <br>
+      
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 offset-m-3 offset-lg-3 offset-sm-3">
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <p class="text-center">or login manually:</p>
+            <div class="input-group mb-3">
+              <input id="email" type="email" class="form-control" placeholder="Enter email..." aria-label="Email">
+            </div>
+            <div class="input-group mb-3">
+              <input id="password" type="password" class="form-control" placeholder="Enter password..." aria-label="Password">
+            </div>
+            <div class="offset-md-4 offset-lg-4 offset-sm-4">
+              <a class="align-right" onclick="login()" href="#"><button>Login</button></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+  
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 offset-m-3 offset-lg-3 offset-sm-3">
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <p class="text-center">Dont have an account?</p>
+            <div class="offset-md-3 offset-lg-3 offset-sm-3">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">
+              Register
+              </button>        
+            </div>
           </div>
         </div>
       </div>

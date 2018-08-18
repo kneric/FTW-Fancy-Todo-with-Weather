@@ -21,14 +21,14 @@ const signin = (req, res) => {
     }
   })
   .catch(err => {
-    res.status(500).json({message: err});
+    res.status(500).json({message: err.message});
   })
 }
 
 const signup = (req, res) => {
   const {name, email, password} = req.body;
 
-  User.findOne({email})
+  return User.findOne({email})
   .then(user => {
     if(!user){
       return User.create({
@@ -43,12 +43,15 @@ const signup = (req, res) => {
           message: 'user created'
         })
       })
+      .catch(err=> {
+        res.status(400).send({message: err.message.message})
+      })
     } else {
       res.status(400).json({message: 'email already used'})
     }
   })
   .catch(err=> {
-    res.status(500).json({message: err})
+    res.status(400).send({message: err.message.message})
   })
 }
 

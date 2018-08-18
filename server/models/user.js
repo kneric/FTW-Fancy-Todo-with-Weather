@@ -19,7 +19,7 @@ const UserSchema = new Schema({
   },
   password: {
     type: String,
-    required: [true, 'please input the password!'],
+    required: [true, 'please input the password. password consists of minimum 6 characters with combination of letter and number'],
     validate: {
       validator: function(pwd){
         let re = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/
