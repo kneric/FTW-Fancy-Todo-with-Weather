@@ -42,7 +42,7 @@ function login () {
     location.reload();
   })
   .catch(err => {
-    alert(err.message);
+    alert(JSON.stringify(err.response.data.message));
   })
 }
 

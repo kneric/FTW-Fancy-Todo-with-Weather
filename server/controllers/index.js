@@ -19,7 +19,7 @@ const signin = (req, res) => {
             message:'Signed in succesfully'
           })
         } else {
-          res.status(403).json({message:'Username / password is incorrect'})
+          res.status(403).json({message:'email / password is incorrect'})
         }
       })
     } else {
