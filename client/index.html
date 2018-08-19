@@ -30,7 +30,7 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-item nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          <button class="nav-item nav-link btn btn-success mr-2" onclick="add()"> Add todo </button>
+          <button class="nav-item nav-link btn btn-success mr-2" data-toggle="modal" data-target="#todoModal"> Add todo </button>
           <button id="logout-btn" class="nav-item nav-link d-none btn btn-warning mr-2" onclick="logout()"> Logout </button>
         </div>
       </div>
@@ -84,7 +84,7 @@
       </div>
     </div>
   
-  <!-- Modal -->
+  <!-- Register Modal -->
     <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
@@ -107,6 +107,29 @@
       </div>
     </div>
 
+    <!-- Todo Modal -->
+    <div class="modal fade" id="todoModal" tabindex="-1" role="dialog" aria-labelledby="todoModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="todoModalLabel">Create New Account</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <input id="newTask" type="text" class="form-control" aria-label="Task">
+            <input id="newEmail" type="email" class="form-control" aria-label="Email">
+            <input id="newPassword" type="password" class="form-control" aria-label="Password">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="register()" >Register</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Todo Card -->
     <div class="row d-none" id="loggedIn">
       <div class="col-lg-12 col-md-12 col-sm-12">
@@ -117,7 +140,6 @@
             <div class="card">
               <div class="card-body text-center">
                 <p><strong>Task</strong></p>
-                <p>Due Date: </p>
                 <p>Priority: </p>
                 <p>Description: </p>
                 <p>lalalala</p>

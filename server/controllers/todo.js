@@ -2,13 +2,12 @@ const jwt = require ('jsonwebtoken');
 const Todo = require('../models/todo');
 
 const createTodo = (req, res)=> {
-  const {task, dueDate, description, priority} = req.body
+  const {task, description, priority} = req.body
   const loggedInUser = jwt.verify(req.body.token, process.env.secretKey);
 
   Todo.create({
     userId: loggedInUser._id,
     task,
-    dueDate,
     description,
     priority
   })
