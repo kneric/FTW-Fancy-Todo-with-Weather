@@ -9,6 +9,7 @@ function isLoggedIn (){
   $('#notLoggedIn').addClass('d-none');
   $('#logout-btn').removeClass('d-none');
   $('#loggedIn').removeClass('d-none');
+  $('#username').html(localStorage.getItem('name'));
 }
 
 function isLoggedOut (){
@@ -24,6 +25,7 @@ function login () {
   })
   .then(data => {
     localStorage.setItem('token', data.data.token);
+    localStorage.setItem('name', data.data.name);
     location.reload();
   })
   .catch(err => {
@@ -61,6 +63,7 @@ function checkLoginState() {
       axios.post('http://localhost:3000/loginfb', response.authResponse)
       .then(data => {
         localStorage.setItem('token', data.data.token);
+        localStorage.setItem('name', data.data.name);
         location.reload();
       })
       .catch(err => {

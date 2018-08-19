@@ -11,7 +11,7 @@ const signin = (req, res) => {
       user.checkPwd(password, (isMatched)=> {
         if(isMatched){
           let token = jwt.sign({_id: user._id}, process.env.secretKey)
-          res.status(200).json({token, message:'Signed in succesfully'})
+          res.status(200).json({token, name: user.name,message:'Signed in succesfully'})
         } else {
           res.status(403).json({message:'Username / password is incorrect'})
         }
@@ -39,7 +39,8 @@ const signup = (req, res) => {
       .then(createdUser=> {
         let token = jwt.sign({_id: createdUser._id}, process.env.secretKey)
         res.status(201).json({
-          token: token, 
+          token: token,
+          name: createdUser.name, 
           message: 'user created'
         })
       })
@@ -74,6 +75,7 @@ const loginFB = (req, res) =>{
           let token = jwt.sign({_id: createdUser._id}, process.env.secretKey)
           res.status(201).json({
             token, 
+            name: createdUser.name,
             message: 'user created'
           })
         })
@@ -81,6 +83,7 @@ const loginFB = (req, res) =>{
         let token = jwt.sign({_id: userOnDb._id}, process.env.secretKey)
         res.status(200).json({
           token,
+          name: userOnDb.name,
           message: 'login with FB success'
         })
       }
