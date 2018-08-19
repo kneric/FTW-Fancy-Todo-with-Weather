@@ -1,15 +1,29 @@
 function tokenCheck () {
   if (localStorage.getItem('token')){
-    return isLoggedIn();
+    return isLoggedIn ();
   }
   return isLoggedOut();
+}
+
+function getLoggedInUser () {
+  return axios.post(
+    'http://localhost:3000/decode',{
+      token: localStorage.getItem('token')}
+  )
 }
 
 function isLoggedIn (){
   $('#notLoggedIn').addClass('d-none');
   $('#logout-btn').removeClass('d-none');
   $('#loggedIn').removeClass('d-none');
-  $('#username').html(localStorage.getItem('name'));
+
+  getLoggedInUser()
+  .then(user => {
+    $('#username').html(user.data.name);
+  })
+  .catch(err => {
+    console.log(err);
+  })
 }
 
 function isLoggedOut (){
@@ -21,11 +35,10 @@ function isLoggedOut (){
 function login () {
   axios.post('http://localhost:3000/signin', {
     email: $('#email').val(),
-    password: $('#password').val()
-  })
+    password: $('#password').val()}
+  )
   .then(data => {
     localStorage.setItem('token', data.data.token);
-    localStorage.setItem('name', data.data.name);
     location.reload();
   })
   .catch(err => {
@@ -63,12 +76,11 @@ function checkLoginState() {
       axios.post('http://localhost:3000/loginfb', response.authResponse)
       .then(data => {
         localStorage.setItem('token', data.data.token);
-        localStorage.setItem('name', data.data.name);
         location.reload();
       })
       .catch(err => {
         console.log(err);
-        // location.reload();
+        location.reload();
       })
     }
   });

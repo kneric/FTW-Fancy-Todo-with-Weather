@@ -10,8 +10,14 @@ const signin = (req, res) => {
     if (user){
       user.checkPwd(password, (isMatched)=> {
         if(isMatched){
-          let token = jwt.sign({_id: user._id}, process.env.secretKey)
-          res.status(200).json({token, name: user.name,message:'Signed in succesfully'})
+          let token = jwt.sign({
+            _id: user._id, 
+            name: user.name
+          }, process.env.secretKey)
+          res.status(200).json({
+            token, 
+            message:'Signed in succesfully'
+          })
         } else {
           res.status(403).json({message:'Username / password is incorrect'})
         }
@@ -37,10 +43,12 @@ const signup = (req, res) => {
         password
       })
       .then(createdUser=> {
-        let token = jwt.sign({_id: createdUser._id}, process.env.secretKey)
+        let token = jwt.sign({
+          _id: createdUser._id,
+          name: createdUser.name
+        }, process.env.secretKey)
         res.status(201).json({
-          token: token,
-          name: createdUser.name, 
+          token: token, 
           message: 'user created'
         })
       })
@@ -72,18 +80,22 @@ const loginFB = (req, res) =>{
           password: process.env.password
         })
         .then(createdUser=> {
-          let token = jwt.sign({_id: createdUser._id}, process.env.secretKey)
+          let token = jwt.sign({
+            _id: createdUser._id,
+            name: createdUser.name,
+          }, process.env.secretKey)
           res.status(201).json({
             token, 
-            name: createdUser.name,
             message: 'user created'
           })
         })
       } else {
-        let token = jwt.sign({_id: userOnDb._id}, process.env.secretKey)
+        let token = jwt.sign({
+          _id: userOnDb._id,
+          name: userOnDb.name
+        }, process.env.secretKey)
         res.status(200).json({
           token,
-          name: userOnDb.name,
           message: 'login with FB success'
         })
       }
@@ -92,11 +104,17 @@ const loginFB = (req, res) =>{
   .catch(err => {
     res.status(400).send(err.message);
   })
+}
 
+const decodeJWT = (req, res) => {
+  console.log('masuk jwt');
+  let loggedInUser = jwt.verify(req.body.token, process.env.secretKey);
+  res.status(200).json(loggedInUser);
 }
 
 module.exports = {
   signin,
   signup,
-  loginFB
+  loginFB,
+  decodeJWT
 };
