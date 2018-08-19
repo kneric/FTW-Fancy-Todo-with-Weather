@@ -23,7 +23,7 @@
   <script src="assets/js/auth.js"></script>
   <script src="assets/js/register.js"></script>
   <script src="assets/js/todo.js"></script>
-  
+
   <!-- Nav bar -->
   <nav class="navbar navbar-expand-md navbar-light bg-primary">
     <div class="container-fluid">
@@ -43,6 +43,13 @@
 
   <div id="app">
     <div class="container">
+
+      <div class="row">
+        <div class="col-md-8 col-sm-6">
+          <div id="openweathermap-widget-11"></div>
+          <br>
+        </div>
+      </div>
 
       <!-- Login form -->
       <div id="notLoggedIn">
@@ -205,7 +212,9 @@
       },
     })
   </script>
-  
+
+ <script src='//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/d3.min.js'></script><script>window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];  window.myWidgetParam.push({id: 11,cityid: '1642911',appid: '3826b43c8c6c7142d9ed1f28d9ab49d4',units: 'metric',containerid: 'openweathermap-widget-11',  });  (function() {var script = document.createElement('script');script.async = true;script.charset = "utf-8";script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(script, s);  })();</script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
