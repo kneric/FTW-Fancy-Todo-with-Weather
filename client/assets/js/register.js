@@ -6,6 +6,7 @@ function register () {
   })
   .then(data => {
     localStorage.setItem('token', data.data.token);
+    listTodo(data.data._id);
     location.reload();
   })
   .catch(err => {

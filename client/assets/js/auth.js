@@ -20,6 +20,7 @@ function isLoggedIn (){
   getLoggedInUser()
   .then(user => {
     $('#username').html(user.data.name);
+    listTodo(user.data._id);
   })
   .catch(err => {
     console.log(err);

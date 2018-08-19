@@ -10,7 +10,7 @@ const TodoSchema = new Schema({
     type: String,
     required: [true, 'input the task!']
   },
-  dueDate: Date,
+  dueDate: String,
   description: String,
   priority: {
     type: Number,

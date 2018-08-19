@@ -4,17 +4,22 @@ const {
   createTodo,
   listTodo,
   updateTodo,
-  deleteTodo
+  deleteTodo,
+  aTodo
 } = require("../controllers/todo");
 const auth = require('../middlewares/auth');
 
 router
   .route("/")
   .post(auth, createTodo)
-  .get(auth, listTodo)
+
+router 
+  .route("/user/:id")
+  .get(listTodo)
 
 router
   .route("/:id")
+  .get(aTodo)
   .put(auth, updateTodo)
   .delete(auth, deleteTodo)
 

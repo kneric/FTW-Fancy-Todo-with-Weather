@@ -15,12 +15,16 @@
   </style>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <!-- This only for development! -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
   <script src="assets/js/auth.js"></script>
   <script src="assets/js/register.js"></script>
   <script src="assets/js/todo.js"></script>
-
+  
+  <!-- Nav bar -->
   <nav class="navbar navbar-expand-md navbar-light bg-primary">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">FTW!</a>
@@ -37,137 +41,171 @@
     </div>
   </nav>
 
-  <div class="container">
+  <div id="app">
+    <div class="container">
 
-    <!-- Login form -->
-    <div id="notLoggedIn">
-      <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6 offset-m-3 offset-lg-3">
-          <h3>Please Login First :</h3>
-          <div class="offset-md-2 offset-lg-2 offset-sm-2">
-            <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-            </fb:login-button>
-          </div>
-        </div>
-      </div>
-      <br>
-      
-      <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6 offset-m-3 offset-lg-3 offset-sm-3">
-          <div class="col-lg-6 col-md-6 col-sm-6">
-            <p class="text-center">or login manually:</p>
-            <div class="input-group mb-3">
-              <input id="email" type="email" class="form-control" placeholder="Enter email..." aria-label="Email">
-            </div>
-            <div class="input-group mb-3">
-              <input id="password" type="password" class="form-control" placeholder="Enter password..." aria-label="Password">
-            </div>
-            <div class="offset-md-4 offset-lg-4 offset-sm-4">
-              <a class="align-right" onclick="login()" href="#"><button>Login</button></a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <br>
-  
-      <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6 offset-m-3 offset-lg-3 offset-sm-3">
-          <div class="col-lg-6 col-md-6 col-sm-6">
-            <p class="text-center">Dont have an account?</p>
-            <div class="offset-md-3 offset-lg-3 offset-sm-3">
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">
-              Register
-              </button>        
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-  <!-- Register Modal -->
-    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-md" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="registerModalLabel">Create New Account</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <input id="newName" type="text" class="form-control" placeholder="Enter name..." aria-label="Name">
-            <input id="newEmail" type="email" class="form-control" placeholder="Enter email..." aria-label="Email">
-            <input id="newPassword" type="password" class="form-control" placeholder="Enter password..." aria-label="Password">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="register()" >Register</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Todo Modal -->
-    <div class="modal fade" id="todoModal" tabindex="-1" role="dialog" aria-labelledby="todoModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-md modal-sm" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="todoModalLabel">Add New Task</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            Task
-            <input id="newTask" type="text" class="form-control" aria-label="Task">
-            <br>
-            Priority
-            <input class="form-control" type="number" id="newPrio">
-            <br>
-            Due Date 
-            <input class="form-control" type="datetime-local" id="newDue">
-            <br>
-            Description
-            <textarea id="newDesc" class="form-control" id="exampleTextarea" rows="3"></textarea>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="add()" >Add</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Todo Card -->
-    <div class="row d-none" id="loggedIn">
-      <div class="col-md-12 col-sm-12">
-        Hello <strong><span id="username"></span></strong> ! 
-        <br>
+      <!-- Login form -->
+      <div id="notLoggedIn">
         <div class="row">
-          <div class="col-md-4 col-sm-4 mb-3 mt-3">
-            <div class="card">
-              <div class="card-body text-center">
-                <p><strong>Task</strong></p>
-                <p>Priority: </p>
-                <p>Description: </p>
-                <p>lalalala</p>
-                <button class="btn btn-warning mr-2" onclick="edit(id)"> Edit </button>
-                <button class="btn btn-success mr-2" onclick="remove(id)"> Complete </button>
+          <div class="col-lg-6 col-md-6 col-sm-6 offset-m-3 offset-lg-3">
+            <h3>Please Login First :</h3>
+            <div class="offset-md-2 offset-lg-2 offset-sm-2">
+              <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+              </fb:login-button>
+            </div>
+          </div>
+        </div>
+        <br>
+        
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6 offset-m-3 offset-lg-3 offset-sm-3">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <p class="text-center">or login manually:</p>
+              <div class="input-group mb-3">
+                <input id="email" type="email" class="form-control" placeholder="Enter email..." aria-label="Email">
+              </div>
+              <div class="input-group mb-3">
+                <input id="password" type="password" class="form-control" placeholder="Enter password..." aria-label="Password">
+              </div>
+              <div class="offset-md-4 offset-lg-4 offset-sm-4">
+                <a class="align-right" onclick="login()" href="#"><button>Login</button></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+    
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6 offset-m-3 offset-lg-3 offset-sm-3">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <p class="text-center">Dont have an account?</p>
+              <div class="offset-md-3 offset-lg-3 offset-sm-3">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">
+                Register
+                </button>        
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    
+    <!-- Register Modal -->
+      <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="registerModalLabel">Create New Account</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <input id="newName" type="text" class="form-control" placeholder="Enter name..." aria-label="Name">
+              <input id="newEmail" type="email" class="form-control" placeholder="Enter email..." aria-label="Email">
+              <input id="newPassword" type="password" class="form-control" placeholder="Enter password..." aria-label="Password">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="register()" >Register</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <!-- Todo Modal -->
+      <div class="modal fade" id="todoModal" tabindex="-1" role="dialog" aria-labelledby="todoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md modal-sm" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="todoModalLabel">Add New Task</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Task
+              <input id="newTask" type="text" class="form-control" aria-label="Task">
+              <br>
+              Priority
+              <input class="form-control" type="number" min="1" max="5" value="1" id="newPrio">
+              <br>
+              Due Date 
+              <input class="form-control" type="date" id="newDue">
+              <br>
+              Description
+              <textarea id="newDesc" class="form-control" rows="3"></textarea>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="add()" >Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit Modal -->
+      <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md modal-sm" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editModalLabel">Edit Task</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <input type="hidden" id="todoId">
+              Task
+              <input id="editTask" type="text" class="form-control" aria-label="Task">
+              <br>
+              Priority
+              <input class="form-control" type="number" min="1" max="5" id="editPrio">
+              <br>
+              Due Date 
+              <input class="form-control" type="date" id="editDue">
+              <br>
+              Description
+              <textarea id="editDesc" class="form-control" rows="3"></textarea>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="update()" >Edit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Todo Card -->
+      <div class="row d-none" id="loggedIn">
+        <div class="col-md-12 col-sm-12">
+          Hello <strong><span id="username"></span></strong> ! 
+          <br>
+          <div id="todos" class="row">
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <script>
     window.onload = tokenCheck();
   </script>
 
-  <!-- This only for development! -->
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    let app = new Vue({ 
+      el: '#app',
+      data: {
+        
+      },
+      methods: {
+      tes: function () {
+              
+      }
+      },
+    })
+  </script>
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>

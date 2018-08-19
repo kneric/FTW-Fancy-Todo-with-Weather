@@ -12,7 +12,7 @@ My #2 portfolio on Hacktiv8
 |api/signup   |POST   |Create new account   |
 |api/signin   |POST   |Login with existing account   |
 |api/loginfb   |POST   |Login with facebook account   |
-|api/todo   |GET   |Show user's todo   |
+|api/todo/user/:id   |GET   |Show user's todo   |
 |api/todo   |POST   |Add new todo   |
 |api/todo/:id   |PUT   |Update todo   |
 |api/todo/:id   |DELETE   |Delete todo   |

@@ -1,12 +1,10 @@
-const jwt = require ('jsonwebtoken');
 const Todo = require('../models/todo');
 
 const createTodo = (req, res)=> {
-  const {task, dueDate, description, priority} = req.body
-  const loggedInUser = jwt.verify(req.body.token, process.env.secretKey);
+  const {userId, task, dueDate, description, priority} = req.body
 
   Todo.create({
-    userId: loggedInUser._id,
+    userId,
     task,
     priority,
     dueDate,
@@ -17,23 +15,37 @@ const createTodo = (req, res)=> {
       createdTask, 
       message:'task created'
     })
-    .catch(err => {
-      res.status(500).json({message: err});
-    })
+  })
+  .catch(err => {
+    res.status(500).json({message: err});
   })
 }
 
 const listTodo = (req, res) => {
-  const loggedInUser = jwt.verify(req.body.token, process.env.secretKey);
   
   Todo.find({
-    userId: loggedInUser._id
+    userId: req.params.id
   })
   .then(todos => {
     if(todos){
       res.status(200).json({todos, message: `here's your todos`})
     } else {
       res.status(200).json({message: `you haven't created any todo`})
+    }
+  })
+  .catch(err =>{
+    res.status(500).json({message: err});
+  })
+}
+
+const aTodo = (req, res) => {
+  
+  Todo.findById(req.params.id)
+  .then(todo => {
+    if(todo){
+      res.status(200).json({todo, message: `here's your todo`})
+    } else {
+      res.status(200).json({message: `you haven't created the todo`})
     }
   })
   .catch(err =>{
@@ -55,7 +67,7 @@ const updateTodo = (req, res) => {
 }
 
 const deleteTodo = (req, res) => {
-  Todo.Model.findByIdAndDelete(req.params.id)
+  Todo.findByIdAndDelete(req.params.id)
   .then(deletedTodo => {
     res.status(200).json({deletedTodo, message: 'todo deleted'})
   })
@@ -68,5 +80,6 @@ module.exports = {
   createTodo,
   listTodo,
   updateTodo,
-  deleteTodo
+  deleteTodo,
+  aTodo
 };
