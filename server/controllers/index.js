@@ -28,7 +28,7 @@ const signin = (req, res) => {
 const signup = (req, res) => {
   const {name, email, password} = req.body;
 
-  return User.findOne({email})
+  User.findOne({email})
   .then(user => {
     if(!user){
       return User.create({
@@ -43,15 +43,12 @@ const signup = (req, res) => {
           message: 'user created'
         })
       })
-      .catch(err=> {
-        res.status(400).send({message: err.message.message})
-      })
     } else {
-      res.status(400).json({message: 'email already used'})
+      res.status(400).send('email already used')
     }
   })
   .catch(err=> {
-    res.status(400).send({message: err.message.message})
+    res.status(400).send(err.message);
   })
 }
 
@@ -61,9 +58,7 @@ const loginFB = (req, res) =>{
   
   axios.get(url)
   .then(response => {
-    // need testing
-    console.log(response);
-    let userFB = JSON.parse(response);
+    let userFB = (response.data);
 
     User.findOne({email: userFB.email})
     .then(userOnDb => {
@@ -73,6 +68,7 @@ const loginFB = (req, res) =>{
           idFB: userFB.id,
           name: userFB.name,
           email: userFB.email,
+          password: process.env.password
         })
         .then(createdUser=> {
           let token = jwt.sign({_id: createdUser._id}, process.env.secretKey)
@@ -91,7 +87,7 @@ const loginFB = (req, res) =>{
     })
   })
   .catch(err => {
-    res.status(500).json({message: err})
+    res.status(400).send(err.message);
   })
 
 }

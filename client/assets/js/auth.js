@@ -1,5 +1,4 @@
 function tokenCheck () {
-  console.log('jalan');
   if (localStorage.getItem('token')){
     return isLoggedIn();
   }
@@ -24,7 +23,7 @@ function login () {
     password: $('#password').val()
   })
   .then(data => {
-    localStorage.setItem('token', data.token);
+    localStorage.setItem('token', data.data.token);
     location.reload();
   })
   .catch(err => {
@@ -61,13 +60,12 @@ function checkLoginState() {
     if (response.status == 'connected'){
       axios.post('http://localhost:3000/loginfb', response.authResponse)
       .then(data => {
-        console.log(data);
         localStorage.setItem('token', data.data.token);
         location.reload();
       })
       .catch(err => {
-        alert('incorrect username/ password');
-        location.reload();
+        console.log(err);
+        // location.reload();
       })
     }
   });
