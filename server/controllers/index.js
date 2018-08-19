@@ -107,7 +107,6 @@ const loginFB = (req, res) =>{
 }
 
 const decodeJWT = (req, res) => {
-  console.log('masuk jwt');
   let loggedInUser = jwt.verify(req.body.token, process.env.secretKey);
   res.status(200).json(loggedInUser);
 }
